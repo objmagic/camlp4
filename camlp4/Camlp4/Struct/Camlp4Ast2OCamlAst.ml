@@ -1178,7 +1178,11 @@ value varify_constructors var_names =
         [mksig loc (Psig_modtype {pmtd_loc=mkloc loc; pmtd_name=with_loc n loc; pmtd_type=si; pmtd_attributes=[]}) :: l]
     | SgOpn loc ov id ->
         let fresh = override_flag loc ov in
-        [mksig loc (Psig_open {popen_override=fresh; popen_lid=long_uident id;
+        let popen_expr = {
+           pmod_desc=Pmod_ident (long_uident id);
+           pmod_loc=mkloc loc;
+           pmod_attributes = []} in
+        [mksig loc (Psig_open {popen_override=fresh; popen_expr;
                                popen_attributes=[]; popen_loc = mkloc loc}) :: l]
     | SgTyp loc rf tdl ->
       let rf = mknrf rf in
@@ -1285,8 +1289,12 @@ value varify_constructors var_names =
         [mkstr loc (Pstr_modtype {pmtd_loc=mkloc loc; pmtd_name=with_loc n loc; pmtd_type=si; pmtd_attributes=[]}) :: l]
     | StOpn loc ov id ->
         let fresh = override_flag loc ov in
+        let popen_expr = {
+           pmod_desc=Pmod_ident (long_uident id);
+           pmod_loc=mkloc loc;
+           pmod_attributes = []} in
         [mkstr loc (Pstr_open {popen_override=fresh;
-                               popen_lid=long_uident id;
+                               popen_expr;
                                popen_attributes=[];
                                popen_loc=mkloc loc}) :: l]
     | StTyp loc rf tdl ->

@@ -16802,7 +16802,10 @@ module Struct =
                        (Psig_open
                           {
                             popen_override = fresh;
-                            popen_lid = long_uident id;
+                            popen_expr = {
+                              pmod_desc=Pmod_ident (long_uident id);
+                              pmod_loc=mkloc loc;
+                              pmod_attributes = []};
                             popen_attributes = [];
                             popen_loc = mkloc loc;
                           })) ::
@@ -17000,7 +17003,10 @@ module Struct =
                        (Pstr_open
                           {
                             popen_override = fresh;
-                            popen_lid = long_uident id;
+                            popen_expr = {
+                              pmod_desc=Pmod_ident (long_uident id);
+                              pmod_loc=mkloc loc;
+                              pmod_attributes = []};
                             popen_attributes = [];
                             popen_loc = mkloc loc;
                           })) ::
